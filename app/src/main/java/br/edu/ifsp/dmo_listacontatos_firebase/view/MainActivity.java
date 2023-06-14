@@ -2,6 +2,7 @@ package br.edu.ifsp.dmo_listacontatos_firebase.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
+import android.widget.SearchView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,11 +15,12 @@ import br.edu.ifsp.dmo_listacontatos_firebase.R;
 import br.edu.ifsp.dmo_listacontatos_firebase.mvp.MainMVP;
 import br.edu.ifsp.dmo_listacontatos_firebase.presenter.MainPresenter;
 
-public class MainActivity extends AppCompatActivity implements MainMVP.View, View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements MainMVP.View, View.OnClickListener, SearchView.OnQueryTextListener{
 
     private MainMVP.Presenter presenter;
     private FloatingActionButton mActionButton;
     private RecyclerView mRecyclerView;
+    private SearchView mSearchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements MainMVP.View, Vie
     @Override
     protected void onStart() {
         super.onStart();
-        presenter.populate(mRecyclerView);
+        presenter.populate(mRecyclerView, null);
         presenter.startListener();
     }
 
@@ -65,9 +67,28 @@ public class MainActivity extends AppCompatActivity implements MainMVP.View, Vie
     private void findById(){
         mActionButton = findViewById(R.id.fab_new_contact);
         mRecyclerView = findViewById(R.id.recyler_view);
+        mSearchView = findViewById(R.id.search_view);
+        mSearchView.setOnQueryTextListener(this);
     }
 
     private void setListener(){
         mActionButton.setOnClickListener(this);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String search) {
+        startPresenter(search);
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String search) {
+        startPresenter(search);
+        return false;
+    }
+
+    public void startPresenter(String search){
+        presenter.populate(mRecyclerView, search);
+        presenter.startListener();
     }
 }

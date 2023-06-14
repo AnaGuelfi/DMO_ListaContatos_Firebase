@@ -11,7 +11,7 @@ public interface MainMVP {
     interface Presenter{
         void detach();
 
-        void populate(RecyclerView recyclerView);
+        void populate(RecyclerView recyclerView, String searchView);
 
         void startListener();
 

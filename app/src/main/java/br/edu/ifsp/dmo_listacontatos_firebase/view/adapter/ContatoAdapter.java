@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import br.edu.ifsp.dmo_listacontatos_firebase.model.Contato;
 import br.edu.ifsp.dmo_listacontatos_firebase.R;
-import br.edu.ifsp.dmo_listacontatos_firebase.view.ItemCliclListener;
+import br.edu.ifsp.dmo_listacontatos_firebase.view.ItemClickListener;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,13 +17,13 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 public class ContatoAdapter extends FirestoreRecyclerAdapter<Contato, ContatoAdapter.ContatoViewHolder> {
 
-    private ItemCliclListener clickListener;
+    private ItemClickListener clickListener;
 
     public ContatoAdapter(@NonNull FirestoreRecyclerOptions<Contato> options) {
         super(options);
     }
 
-    public void setClickListener(ItemCliclListener clickListener){
+    public void setClickListener(ItemClickListener clickListener){
         this.clickListener = clickListener;
     }
 

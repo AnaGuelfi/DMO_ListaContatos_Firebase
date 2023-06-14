@@ -6,7 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".view.MainActivity">
 
+    <SearchView
+        android:id="@+id/search_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:iconifiedByDefault="false"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <requestFocus />
+    </SearchView>
+
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="50dp"
         android:id="@+id/recyler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
